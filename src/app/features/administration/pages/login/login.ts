@@ -1,18 +1,13 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-
-import { InputTextModule } from 'primeng/inputtext';
 import { CheckboxModule } from 'primeng/checkbox';
-import { PasswordModule } from 'primeng/password';
-import { ButtonModule } from 'primeng/button';
-
-import { OauthDataSource } from '../../datasources';
 import { environment } from '../../../../../environments/environment';
+import { AuthDataSource } from '../../services/auth-data-source';
 
 @Component({
-  selector: 'app-login-page',
-  imports: [ReactiveFormsModule, CheckboxModule, InputTextModule, PasswordModule, ButtonModule],
+  selector: 'app-login',
+  imports: [ReactiveFormsModule, CheckboxModule],
   template: `
     <div class="min-h-screen flex flex-col bg-surface-50 relative font-sans">
       <div class="absolute top-6 left-6 flex items-center">
@@ -73,10 +68,10 @@ import { environment } from '../../../../../environments/environment';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class LoginPage {
+export default class Login {
   private _formBuilder = inject(FormBuilder);
 
-  private authData = inject(OauthDataSource);
+  private authDataSource = inject(AuthDataSource);
   private router = inject(Router);
 
   loginForm: FormGroup = this._formBuilder.group({
@@ -93,26 +88,15 @@ export default class LoginPage {
 
   onSubmit() {
     if (this.loginForm.invalid) return;
-    const { login, password } = this.loginForm.value;
-    const form = document.createElement('form');
-    form.method = 'POST';
-    form.action = `${environment.baseUrl}/auth/login`;
-    form.style.display = 'none';
-
-    const addField = (name: string, value: string) => {
-      const input = document.createElement('input');
-      input.type = 'hidden';
-      input.name = name;
-      input.value = value;
-      form.appendChild(input);
-    };
-
-    addField('login', login);
-    addField('password', password);
-
-
-    document.body.appendChild(form);
-    form.submit();
+    const { login, password, remember } = this.loginForm.value;
+    this.authDataSource.login(login, password, remember).subscribe({
+      next: () => {
+        console.log('Succes login');
+      },
+      error: (err) => {
+        console.error('Login failed', err);
+      },
+    });
   }
 
   private loadForm(): void {
