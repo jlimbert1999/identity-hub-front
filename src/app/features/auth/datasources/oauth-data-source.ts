@@ -26,14 +26,5 @@ export class OauthDataSource {
       );
   }
 
-  // checkAuthStatus() {
-  //   return this.http.get(`${this.URL}/status`, { withCredentials: true }).pipe(
-  //     tap((resp) => console.log(resp)),
-  //     map(() => true),
-  //     catchError((err) => {
-  //       console.log(err);
-  //       return of(false);
-  //     })
-  //   );
-  // }
+ 
 }

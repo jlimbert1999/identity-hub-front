@@ -41,7 +41,7 @@ import { MenuItem } from 'primeng/api';
 })
 export class Sidebar {
   menu: MenuItem[] = [
-    { label: 'Dashboard', icon: 'pi pi-home', routerLink: '/admin' },
+    { label: 'Dashboard', icon: 'pi pi-home', routerLink: 'clients' },
     { label: 'Usuarios', icon: 'pi pi-users', routerLink: '/admin/users' },
     { label: 'Roles', icon: 'pi pi-lock', routerLink: '/admin/roles' },
     { label: 'Configuración', icon: 'pi pi-cog', routerLink: '/admin/settings' },

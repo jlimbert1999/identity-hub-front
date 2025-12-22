@@ -1,51 +1,18 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { BreakpointObserver } from '@angular/cdk/layout';
 import { RouterModule } from '@angular/router';
 
 import { DrawerModule } from 'primeng/drawer';
+import { ButtonModule } from 'primeng/button';
+import { AvatarModule } from 'primeng/avatar';
 
 import { Sidebar } from '../../components';
-import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-admin-layout',
-  imports: [RouterModule, Sidebar, DrawerModule, ButtonModule],
+  imports: [RouterModule, Sidebar, DrawerModule, ButtonModule, AvatarModule],
   templateUrl: './admin-layout.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styles: `
-  /* Sidebar desktop enter */
-.sidebar-enter {
-  animation: sidebar-slide-in 250ms ease-out both;
-}
-
-/* Sidebar desktop leave */
-.sidebar-leave {
-  animation: sidebar-slide-out 200ms ease-in both;
-}
-
-@keyframes sidebar-slide-in {
-  from {
-    opacity: 0;
-    transform: translateX(-100%);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes sidebar-slide-out {
-  from {
-    opacity: 1;
-    transform: translateX(0);
-  }
-  to {
-    opacity: 0;
-    transform: translateX(-100%);
-  }
-}
-
-  `,
 })
 export default class AdminLayout {
   isMobile = signal(false);

@@ -1,13 +1,16 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
+
+import { InputTextModule } from 'primeng/inputtext';
 import { CheckboxModule } from 'primeng/checkbox';
-import { environment } from '../../../../../environments/environment';
+import { ButtonModule } from 'primeng/button';
+
 import { AuthDataSource } from '../../services/auth-data-source';
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule, CheckboxModule],
+  imports: [ReactiveFormsModule, CheckboxModule, ButtonModule, InputTextModule],
   template: `
     <div class="min-h-screen flex flex-col bg-surface-50 relative font-sans">
       <div class="absolute top-6 left-6 flex items-center">
@@ -89,13 +92,8 @@ export default class Login {
   onSubmit() {
     if (this.loginForm.invalid) return;
     const { login, password, remember } = this.loginForm.value;
-    this.authDataSource.login(login, password, remember).subscribe({
-      next: () => {
-        console.log('Succes login');
-      },
-      error: (err) => {
-        console.error('Login failed', err);
-      },
+    this.authDataSource.login(login, password, remember).subscribe(() => {
+      this.router.navigate(['/admin']);
     });
   }
 

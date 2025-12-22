@@ -1,0 +1,56 @@
+<form [formGroup]="roleForm" (ngSubmit)="save()">
+  <div class="grid sm:grid-cols-1 lg:grid-cols-2 gap-x-2 gap-y-6 pt-1">
+    <div class="sm:col-span-2">
+      <p-floatlabel variant="on">
+        <input id="name" [fluid]="true" pInputText autocomplete="off" formControlName="name" />
+        <label for="name">Nombre</label>
+      </p-floatlabel>
+    </div>
+    <div class="sm:col-span-2">
+      <p-floatlabel variant="on">
+        <input
+          id="description"
+          [fluid]="true"
+          pInputText
+          autocomplete="off"
+          formControlName="description"
+        />
+        <label for="description">Descripcion</label>
+      </p-floatlabel>
+    </div>
+    <div>
+      <p-floatlabel variant="on">
+        <input id="code" [fluid]="true" pInputText autocomplete="off" formControlName="clientKey" />
+        <label for="code">Codigo</label>
+      </p-floatlabel>
+    </div>
+    <div>
+      <p-floatlabel variant="on">
+        <input
+          id="baseUrl"
+          [fluid]="true"
+          pInputText
+          autocomplete="off"
+          formControlName="baseUrl"
+        />
+        <label for="baseUrl">URL</label>
+      </p-floatlabel>
+    </div>
+    <div>
+      <p-floatlabel variant="on">
+        <input
+          id="defaultRole"
+          [fluid]="true"
+          pInputText
+          autocomplete="off"
+          formControlName="defaultRole"
+        />
+        <label for="defaultRole">Nombre del rol</label>
+      </p-floatlabel>
+    </div>
+  </div>
+  <div class="p-dialog-footer">
+    <p-button label="Cancelar" type="button" severity="secondary" (onClick)="close()" />
+    <p-button label="Guardar" type="submit" [disabled]="roleForm.invalid" />
+  </div>
+</form>
