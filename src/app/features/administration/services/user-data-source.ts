@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 
 import { environment } from '../../../../environments/environment';
+import { tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -24,8 +25,14 @@ export class UserDataSource {
     const params = new HttpParams({
       fromObject: { limit, offset, ...(term && { term }) },
     });
-    return this.http.get<{ users: any[]; total: number }>(this.URL, {
-      params,
-    });
+    return this.http
+      .get<{ users: any[]; total: number }>(this.URL, {
+        params,
+      })
+      .pipe(
+        tap((resp) => {
+          console.log(resp);
+        })
+      );
   }
 }
