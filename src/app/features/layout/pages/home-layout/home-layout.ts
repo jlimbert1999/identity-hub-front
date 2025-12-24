@@ -9,12 +9,12 @@ import { AvatarModule } from 'primeng/avatar';
 import { Sidebar } from '../../components';
 
 @Component({
-  selector: 'app-admin-layout',
+  selector: 'app-home-layout',
   imports: [RouterModule, Sidebar, DrawerModule, ButtonModule, AvatarModule],
-  templateUrl: './admin-layout.html',
+  templateUrl: './home-layout.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class AdminLayout {
+export default class HomeLayout {
   isMobile = signal(false);
   mobileMenuOpen = signal(false);
 

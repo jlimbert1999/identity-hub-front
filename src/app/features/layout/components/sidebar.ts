@@ -9,7 +9,7 @@ import { MenuItem } from 'primeng/api';
     <nav class="h-full flex flex-col">
       <!-- LOGO -->
       <div class="h-14 flex items-center px-4 border-b border-surface-200">
-        <span class="text-lg font-bold text-primary-700"> Admin </span>
+        <span class="text-lg font-bold text-primary-700"> </span>
       </div>
 
       <!-- MENU -->
@@ -45,5 +45,6 @@ export class Sidebar {
     { label: 'Usuarios', icon: 'pi pi-users', routerLink: '/admin/users' },
     { label: 'Roles', icon: 'pi pi-lock', routerLink: '/admin/roles' },
     { label: 'Configuración', icon: 'pi pi-cog', routerLink: '/admin/settings' },
+    { label: 'Mis Accesos', icon: 'pi  pi-th-large', routerLink: 'apps' },
   ];
 }

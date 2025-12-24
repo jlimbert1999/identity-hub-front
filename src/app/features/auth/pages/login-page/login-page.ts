@@ -14,7 +14,7 @@ import { environment } from '../../../../../environments/environment';
   selector: 'app-login-page',
   imports: [ReactiveFormsModule, CheckboxModule, InputTextModule, PasswordModule, ButtonModule],
   template: `
-    <div class="min-h-screen flex flex-col bg-surface-50 relative font-sans">
+    <div class="min-h-screen flex flex-col bg-surface-50 relative">
       <div class="absolute top-6 left-6 flex items-center">
         <img src="images/logos/gams.png" class="h-16 sm:h-22 object-contain" />
       </div>
@@ -24,7 +24,9 @@ import { environment } from '../../../../../environments/environment';
         >
           <div class="flex flex-col items-center text-center">
             <img src="images/icons/app.png" class="h-18 mb-2" />
-            <h2 class="text-2xl font-bold text-gray-800 tracking-tight">Sistema Intranet</h2>
+            <h2 class="text-2xl font-bold text-gray-800 tracking-tight">
+              Registro Institucional de Identidad
+            </h2>
             <p class="mt-1 text-gray-500 text-lg">Inicio de sesión</p>
           </div>
 
@@ -109,7 +111,6 @@ export default class LoginPage {
 
     addField('login', login);
     addField('password', password);
-
 
     document.body.appendChild(form);
     form.submit();
