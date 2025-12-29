@@ -9,10 +9,10 @@
   <div
     class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-7xl mx-auto"
   >
-    @for (app of systems(); track app.id) {
+    @for (app of access(); track app.id) {
     <button
-      (click)="openApp(app.url)"
-      class="group relative flex flex-col items-start p-6 bg-surface-0 border border-surface-200 rounded-2xl shadow-sm hover:shadow-xl hover:border-primary-500 dark:hover:border-primary-400 transition-all duration-300 text-left"
+      (click)="openApp(app.application.baseUrl)"
+      class="group relative flex flex-col items-start p-6 bg-surface-0 border border-surface-200 rounded-2xl shadow-sm hover:shadow-xl hover:border-primary-500 transition-all duration-300 text-left"
     >
       <div
         class="mb-4 p-3 rounded-xl bg-primary-50 dark:bg-primary-900/30 group-hover:scale-110 transition-transform duration-300"
@@ -20,13 +20,11 @@
         <img [src]="app.imageUrl" [alt]="app.name" class="w-12 h-12 object-contain" />
       </div>
 
-      <h3
-        class="text-lg font-semibold text-surface-900 dark:text-surface-50 mb-2 group-hover:text-primary-600 dark:group-hover:text-primary-400"
-      >
-        {{ app.name }}
+      <h3 class="text-lg font-semibold text-surface-900 mb-2 group-hover:text-primary-600">
+        {{ app.application.name }}
       </h3>
-      <p class="text-sm text-surface-600 dark:text-surface-400 line-clamp-2">
-        {{ app.description }}
+      <p class="text-sm text-surface-600 line-clamp-2">
+        {{ app.application.description }}
       </p>
 
       <div class="absolute bottom-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity">
