@@ -30,16 +30,22 @@
         <th>Usuario</th>
         <th>Nombre</th>
         <th>Correo</th>
-        <th>Estado</th>
-        <th ></th>
+        <th class="w-[150px]">Estado</th>
+        <th style="width: 2rem"></th>
       </tr>
     </ng-template>
     <ng-template #body let-item>
       <tr>
         <td>{{ item.login }}</td>
         <td>{{ item.fullName | titlecase }}</td>
-        <td>{{ item.email }}</td>
-        <td>{{ item.isActive }}</td>
+        <td>{{ item.email ? item.email : 'Sin correo' }}</td>
+        <td>
+          @if(item.isActive){
+          <p-tag severity="success" value="Habilitado" />
+          } @else {
+          <p-tag severity="warn" value="Deshabilitado" />
+          }
+        </td>
         <td>
           <p-button
             [text]="true"
@@ -48,14 +54,6 @@
             size="small"
             (click)="openUserDialog(item)"
           />
-          <p-button
-            [text]="true"
-            [rounded]="true"
-            icon="pi pi-objects-column"
-            size="small"
-            (click)="openUserAssigmentDialog(item)"
-          />
-          
         </td>
       </tr>
     </ng-template>

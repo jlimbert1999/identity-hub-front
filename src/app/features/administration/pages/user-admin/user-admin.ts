@@ -6,15 +6,16 @@ import { TableModule, TablePageEvent } from 'primeng/table';
 import { DialogService } from 'primeng/dynamicdialog';
 import { ButtonModule } from 'primeng/button';
 import { MenuModule } from 'primeng/menu';
+import { TagModule } from 'primeng/tag';
 import { MenuItem } from 'primeng/api';
 
-import { UserAssigmentEditor, UserEditor } from '../../dialogs';
+import { UserEditor } from '../../dialogs';
 import { SearchInput } from '../../../../shared';
 import { UserDataSource } from '../../services';
 
 @Component({
   selector: 'app-user-admin',
-  imports: [CommonModule, ButtonModule, TableModule, SearchInput, MenuModule],
+  imports: [CommonModule, ButtonModule, TableModule, SearchInput, MenuModule, TagModule],
   templateUrl: './user-admin.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -53,26 +54,6 @@ export default class UserAdmin {
       draggable: false,
       closeOnEscape: true,
       closable: true,
-      width: '30vw',
-      data: user,
-      breakpoints: {
-        '960px': '75vw',
-        '640px': '90vw',
-      },
-    });
-    dialogRef?.onClose.subscribe((result?: any) => {
-      if (!result) return;
-      this.updateItemDataSource(result);
-    });
-  }
-
-  openUserAssigmentDialog(user?: any) {
-    const dialogRef = this.dialogService.open(UserAssigmentEditor, {
-      header: 'Asignacion sistemas',
-      modal: true,
-      draggable: false,
-      closeOnEscape: true,
-      closable: true,
       width: '40vw',
       data: user,
       breakpoints: {
@@ -94,26 +75,6 @@ export default class UserAdmin {
   changePage(event: TablePageEvent) {
     this.limit.set(event.rows);
     this.offset.set(event.first);
-  }
-
-  showMenu(item: any): void {
-    this.menuOptions.set([
-      {
-        label: 'Acciones',
-        items: [
-          {
-            label: 'Editar usuario',
-            icon: 'pi pi-pencil',
-            command: () => this.openUserDialog(item),
-          },
-          // {
-          //   label: 'Asignaciones',
-          //   icon: 'pi pi-clock',
-          //   command: () => this.addMeterReading(item),
-          // },
-        ],
-      },
-    ]);
   }
 
   private updateItemDataSource(item: any): void {

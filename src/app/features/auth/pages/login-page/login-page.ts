@@ -14,7 +14,7 @@ import { environment } from '../../../../../environments/environment';
   selector: 'app-login-page',
   imports: [ReactiveFormsModule, CheckboxModule, InputTextModule, PasswordModule, ButtonModule],
   template: `
-    <div class="min-h-screen flex flex-col bg-surface-50 relative">
+    <div class="min-h-screen flex flex-col bg-surface-100 relative">
       <div class="absolute top-6 left-6 flex items-center">
         <img src="images/logos/gams.png" class="h-16 sm:h-22 object-contain" />
       </div>

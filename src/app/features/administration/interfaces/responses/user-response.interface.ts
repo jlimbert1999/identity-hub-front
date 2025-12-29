@@ -10,7 +10,7 @@ export interface UserResponse {
   roles: string[];
   createdAt: Date;
   updatedAt: Date;
-  applications: UserApplicationResponse[];
+  accesses: UserApplicationResponse[];
 }
 
 export interface UserApplicationResponse {

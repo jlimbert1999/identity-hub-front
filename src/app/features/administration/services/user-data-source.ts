@@ -1,24 +1,31 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { inject, Injectable } from '@angular/core';
 
-import { environment } from '../../../../environments/environment';
 import { tap } from 'rxjs';
+
+import { environment } from '../../../../environments/environment';
+import { ApplicationResponse, UserResponse } from '../interfaces';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserDataSource {
-  readonly URL = `${environment.baseUrl}/users`;
   private http = inject(HttpClient);
+  readonly URL = environment.baseUrl;
 
-  constructor() {}
-
+  readonly applications = toSignal(
+    this.http.get<ApplicationResponse[]>(`${this.URL}/access/applications`),
+    {
+      initialValue: [],
+    }
+  );
   create(form: object) {
-    return this.http.post(this.URL, form);
+    return this.http.post<UserResponse>(`${this.URL}/access`, form);
   }
 
-  update(id: number, form: object) {
-    return this.http.patch(`${this.URL}/${id}`, form);
+  update(id: string, form: object) {
+    return this.http.put<UserResponse>(`${this.URL}/access/${id}`, form);
   }
 
   findAll(limit: number, offset: number, term?: string) {
@@ -26,7 +33,7 @@ export class UserDataSource {
       fromObject: { limit, offset, ...(term && { term }) },
     });
     return this.http
-      .get<{ users: any[]; total: number }>(this.URL, {
+      .get<{ users: any[]; total: number }>(`${this.URL}/users`, {
         params,
       })
       .pipe(

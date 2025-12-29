@@ -6,11 +6,11 @@ import { DrawerModule } from 'primeng/drawer';
 import { ButtonModule } from 'primeng/button';
 import { AvatarModule } from 'primeng/avatar';
 
-import { Sidebar } from '../../components';
+import { ProfileOverlay, Sidebar } from '../../components';
 
 @Component({
   selector: 'app-home-layout',
-  imports: [RouterModule, Sidebar, DrawerModule, ButtonModule, AvatarModule],
+  imports: [RouterModule, Sidebar, DrawerModule, ButtonModule, AvatarModule, ProfileOverlay],
   templateUrl: './home-layout.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
