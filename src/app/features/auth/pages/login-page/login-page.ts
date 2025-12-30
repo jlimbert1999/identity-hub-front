@@ -114,10 +114,22 @@ export default class LoginPage {
 
   login() {
     if (this.loginForm.invalid) return;
+
     const { login, password, remember } = this.loginForm.value;
+
+    const url = new URL(window.location.href);
+
+    const authRequestId = url.searchParams.get('auth_request_id');
+
     const form = document.createElement('form');
     form.method = 'POST';
-    form.action = `${environment.baseUrl}/auth/login`;
+
+    let action = `${environment.baseUrl}/auth/login`;
+    if (authRequestId) {
+      action += `?auth_request_id=${authRequestId}`;
+    }
+
+    form.action = action;
     form.style.display = 'none';
 
     const addField = (name: string, value: string) => {
