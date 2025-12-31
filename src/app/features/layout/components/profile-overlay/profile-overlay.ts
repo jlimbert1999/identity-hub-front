@@ -14,7 +14,7 @@ import { AuthDataSource } from '../../services';
     <p-avatar icon="pi pi-user" shape="circle" (click)="op.toggle($event)" />
     <p-popover #op > 
       <ng-template pTemplate="content">
-        <div class="w-[300px]  bg-surface-100">
+        <div class="w-[300px]">
           <div class="flex flex-col items-center p-0">
             <div class="w-full flex justify-end mb-2">
               <button (click)="op.hide()" class="p-1 hover:bg-gray-100 rounded-full text-gray-500">

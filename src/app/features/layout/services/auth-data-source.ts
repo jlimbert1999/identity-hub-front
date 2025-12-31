@@ -3,8 +3,8 @@ import { computed, inject, Injectable, signal } from '@angular/core';
 import { catchError, map, of, tap } from 'rxjs';
 
 import { environment } from '../../../../environments/environment';
-import { MENU_ACTIONS } from '../constants/menu.config';
 import { AuthUserResponse } from '../../administration/interfaces';
+import { MENU_ACTIONS } from '../constants/menu.config';
 
 @Injectable({
   providedIn: 'root',
@@ -46,14 +46,12 @@ export class AuthDataSource {
     //     map(() => true),
     //     catchError(() => of(false))
     //   );
-    // TODO replace for url autgh
     return this.http
-      .get<{ user: AuthUserResponse }>(`${environment.baseUrl}/oauth/status`, {
+      .get<{ user: AuthUserResponse }>(`${environment.baseUrl}/auth/status`, {
         withCredentials: true,
       })
       .pipe(
         tap(({ user }) => {
-          console.log(user);
           this._user.set(user);
           console.log(this.menu());
         }),
@@ -66,6 +64,6 @@ export class AuthDataSource {
   }
 
   logout() {
-    return this.http.post(`${environment.baseUrl}/oauth/logout`, {}, { withCredentials: true });
+    return this.http.post(`${environment.baseUrl}/auth/logout`, {}, { withCredentials: true });
   }
 }
