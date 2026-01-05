@@ -9,36 +9,41 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const http = inject(HttpClient);
   const router = inject(Router);
 
-  return next(req).pipe(
-    catchError((error: HttpErrorResponse) => {
-      console.log(error.status);
-      if (error.status !== 401) {
-        return throwError(() => error);
-      }
+  const reqWithHeader = req.clone({
+    withCredentials: true,
+  });
 
-      // evitar loop
-      if (req.url.includes('/auth/refresh')) {
-        router.navigate(['/login']);
-        return throwError(() => error);
-      }
+  return next(reqWithHeader)
+    .pipe
+    // catchError((error: HttpErrorResponse) => {
+    //   console.log(error.status);
+    //   if (error.status !== 401) {
+    //     return throwError(() => error);
+    //   }
 
-      if (refreshing) {
-        return throwError(() => error);
-      }
+    //   // evitar loop
+    //   if (req.url.includes('/auth/refresh')) {
+    //     router.navigate(['/login']);
+    //     return throwError(() => error);
+    //   }
 
-      refreshing = true;
-      console.log('Llamando refresh');
-      return http.post(`${environment.baseUrl}/oauth/refresh`, {}, { withCredentials: true }).pipe(
-        switchMap(() => {
-          refreshing = false;
-          return next(req);
-        }),
-        catchError((refreshError) => {
-          refreshing = false;
-          router.navigate(['/login']);
-          return throwError(() => refreshError);
-        })
-      );
-    })
-  );
+    //   if (refreshing) {
+    //     return throwError(() => error);
+    //   }
+
+    //   refreshing = true;
+    //   console.log('Llamando refresh');
+    //   return http.post(`${environment.baseUrl}/oauth/refresh`, {}, { withCredentials: true }).pipe(
+    //     switchMap(() => {
+    //       refreshing = false;
+    //       return next(req);
+    //     }),
+    //     catchError((refreshError) => {
+    //       refreshing = false;
+    //       router.navigate(['/login']);
+    //       return throwError(() => refreshError);
+    //     })
+    //   );
+    // })
+    ();
 };
