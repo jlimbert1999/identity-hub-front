@@ -37,7 +37,7 @@ const ERROR_MESSAGES: Record<string, string> = {
           <div class="flex flex-col items-center text-center">
             <img src="images/icons/app.png" class="h-18 mb-2" />
             <h2 class="text-2xl font-bold text-gray-800 tracking-tight">
-              Registro Institucional de Identidad
+              Sistema Institucional de Autenticación y Acceso - SIAA
             </h2>
             <p class="mt-1 text-gray-500 text-lg">Inicio de sesión</p>
           </div>
@@ -54,19 +54,21 @@ const ERROR_MESSAGES: Record<string, string> = {
                   type="text"
                   placeholder="Ingrese su nombre de usuario"
                   class="w-full px-3 py-2 shadow-sm rounded-lg"
+                  autocomplete="username"
                   formControlName="login"
                 />
               </div>
               <div class="flex flex-col gap-1 w-full">
-                <label for="password" class="text-surface-900 font-medium leading-normal"
-                  >Contraseña</label
-                >
+                <label for="password" class="text-surface-900 font-medium leading-normal">
+                  Contraseña
+                </label>
                 <input
                   pInputText
                   id="password"
                   type="password"
                   placeholder="Ingrese su contraseña"
                   class="w-full px-3 py-2 shadow-sm rounded-lg"
+                  autocomplete="current-password"
                   formControlName="password"
                 />
               </div>

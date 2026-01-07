@@ -2,7 +2,11 @@ import { Routes } from '@angular/router';
 import { userGuard } from './features/layout/guards/user-guard';
 
 export const routes: Routes = [
-  { path: 'login', loadComponent: () => import('./features/auth/pages/login-page/login-page') },
+  {
+    path: 'login',
+    title: 'Inicio de Sesion',
+    loadComponent: () => import('./features/auth/pages/login-page/login-page'),
+  },
   {
     path: '',
     canActivate: [userGuard],
@@ -14,10 +18,12 @@ export const routes: Routes = [
       },
       {
         path: 'applications',
-        loadComponent: () => import('./features/administration/pages/client-admin/client-admin'),
+        loadComponent: () =>
+          import('./features/administration/pages/application-admin/application-admin'),
       },
       {
         path: 'apps',
+        title: 'Mis sistemas',
         loadComponent: () => import('./features/access-portal/pages/my-access/my-access'),
       },
     ],

@@ -1,4 +1,4 @@
-<form [formGroup]="roleForm" (ngSubmit)="save()">
+<form [formGroup]="applicationForm" (ngSubmit)="save()">
   <div class="grid sm:grid-cols-1 lg:grid-cols-2 gap-x-2 gap-y-6 pt-1">
     <div class="sm:col-span-2">
       <p-floatlabel variant="on">
@@ -20,20 +20,20 @@
     </div>
     <div>
       <p-floatlabel variant="on">
-        <input id="code" [fluid]="true" pInputText autocomplete="off" formControlName="clientKey" />
+        <input id="code" [fluid]="true" pInputText autocomplete="off" formControlName="clientId" />
         <label for="code">Codigo</label>
       </p-floatlabel>
     </div>
     <div>
       <p-floatlabel variant="on">
         <input
-          id="baseUrl"
+          id="launchUrl"
           [fluid]="true"
           pInputText
           autocomplete="off"
-          formControlName="baseUrl"
+          formControlName="launchUrl"
         />
-        <label for="baseUrl">URL</label>
+        <label for="launchUrl">URL de inicio</label>
       </p-floatlabel>
     </div>
     <div>
@@ -48,9 +48,22 @@
         <label for="defaultRole">Nombre del rol</label>
       </p-floatlabel>
     </div>
+    <div class="sm:col-span-2">
+      <p-floatlabel variant="on">
+        <p-autocomplete
+          inputId="redirect_uris"
+          formControlName="redirectUris"
+          multiple
+          fluid
+          [typeahead]="false"
+          [addOnBlur]="true"
+        />
+        <label for="redirect_uris">URLs de redireccion (SSO)</label>
+      </p-floatlabel>
+    </div>
   </div>
   <div class="p-dialog-footer">
     <p-button label="Cancelar" type="button" severity="secondary" (onClick)="close()" />
-    <p-button label="Guardar" type="submit" [disabled]="roleForm.invalid" />
+    <p-button label="Guardar" type="submit" [disabled]="applicationForm.invalid" />
   </div>
 </form>

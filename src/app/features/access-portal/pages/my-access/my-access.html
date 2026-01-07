@@ -2,7 +2,7 @@
   <header class="mb-10 max-w-7xl mx-auto">
     <h1 class="text-3xl font-bold text-surface-900">Mis Sistemas</h1>
     <p class="text-surface-600 dark:text-surface-400">
-      Selecciona una aplicación para comenzar a trabajar.
+      Sistemas institucionales habilitados para su usuario.
     </p>
   </header>
 
@@ -11,7 +11,7 @@
   >
     @for (app of access(); track app.id) {
     <button
-      (click)="openApp(app.application.baseUrl)"
+      (click)="openApp(app.application.launchUrl)"
       class="group relative flex flex-col items-start p-6 bg-surface-0 border border-surface-200 rounded-2xl shadow-sm hover:shadow-xl hover:border-primary-500 transition-all duration-300 text-left"
     >
       <div

@@ -8,15 +8,15 @@ import { ButtonModule } from 'primeng/button';
 import { ClientDataSource } from '../../services';
 import { SearchInput } from '../../../../shared';
 import { ClientResponse } from '../../interfaces';
-import { ClientEditor } from '../../dialogs';
+import { ApplicationEditor } from '../../dialogs';
 
 @Component({
-  selector: 'app-client-admin',
+  selector: 'app-application-admin',
   imports: [ButtonModule, TableModule, SearchInput],
-  templateUrl: './client-admin.html',
+  templateUrl: './application-admin.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class ClientAdmin {
+export default class ApplicationAdmin {
   private dialogService = inject(DialogService);
   private clientDataSource = inject(ClientDataSource);
 
@@ -43,7 +43,7 @@ export default class ClientAdmin {
   });
 
   openCreateDialog() {
-    const dialogRef = this.dialogService.open(ClientEditor, {
+    const dialogRef = this.dialogService.open(ApplicationEditor, {
       header: 'Crear rol',
       modal: true,
       draggable: false,
@@ -60,7 +60,7 @@ export default class ClientAdmin {
   }
 
   openUpdateDialog(item: any) {
-    const dialogRef = this.dialogService.open(ClientEditor, {
+    const dialogRef = this.dialogService.open(ApplicationEditor, {
       header: 'Editar rol',
       modal: true,
       width: '30vw',

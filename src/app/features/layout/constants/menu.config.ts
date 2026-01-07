@@ -4,23 +4,19 @@ export const MENU_ACTIONS: MenuItem[] = [
   {
     label: 'Usuarios',
     routerLink: '/users',
+    icon: 'pi-users',
     roles: ['ADMIN'],
   },
   {
-    label: 'Aplicaciones',
+    label: 'Sistemas',
     routerLink: '/applications',
+    icon: 'pi-box',
     roles: ['ADMIN'],
   },
   {
-    label: 'Mis Apps',
+    label: 'Mis sistemas',
     routerLink: '/apps',
     icon: 'pi-th-large',
     roles: ['USER'],
   },
 ];
-
-//  { label: 'Dashboard', icon: 'pi pi-home', items: [{ label: 'Preueb', }] },
-//     { label: 'Usuarios', icon: 'pi pi-users', routerLink: '/admin/users' },
-//     { label: 'Roles', icon: 'pi pi-lock', routerLink: '/admin/roles' },
-//     { label: 'Configuración', icon: 'pi pi-cog', routerLink: '/admin/settings' },
-//     { label: 'Mis Accesos', icon: 'pi  pi-th-large', routerLink: 'apps' },

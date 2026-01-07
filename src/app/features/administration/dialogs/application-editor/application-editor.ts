@@ -1,33 +1,45 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 
 import { ClientDataSource } from '../../services';
 import { ClientResponse } from '../../interfaces';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-client-editor',
-  imports: [ReactiveFormsModule, FloatLabelModule, InputTextModule, ButtonModule],
-  templateUrl: './client-editor.html',
+  selector: 'app-application-editor',
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    FloatLabelModule,
+    InputTextModule,
+    ButtonModule,
+    AutoCompleteModule,
+  ],
+  templateUrl: './application-editor.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ClientEditor {
+export class ApplicationEditor {
   private _formBuilder = inject(FormBuilder);
   private dialogRef = inject(DynamicDialogRef);
   private clientDataSource = inject(ClientDataSource);
 
   readonly data?: ClientResponse = inject(DynamicDialogConfig).data;
 
-  roleForm: FormGroup = this._formBuilder.nonNullable.group({
+  applicationForm: FormGroup = this._formBuilder.nonNullable.group({
     name: ['', Validators.required],
-    clientKey: ['', Validators.required],
+    clientId: ['', Validators.required],
     description: [''],
-    baseUrl: ['', Validators.required],
+    launchUrl: ['', Validators.required],
     defaultRole: ['', Validators.required],
+    isConfidential: [true, Validators.required],
+    isActive: [true, Validators.required],
+    redirectUris: [[], Validators.required],
   });
 
   ngOnInit() {
@@ -36,8 +48,8 @@ export class ClientEditor {
 
   save() {
     const saveObservable = this.data
-      ? this.clientDataSource.update(this.data.id, this.roleForm.value)
-      : this.clientDataSource.create(this.roleForm.value);
+      ? this.clientDataSource.update(this.data.id, this.applicationForm.value)
+      : this.clientDataSource.create(this.applicationForm.value);
     saveObservable.subscribe((resp) => {
       this.dialogRef.close(resp);
     });
@@ -49,6 +61,6 @@ export class ClientEditor {
 
   private loadForm() {
     if (!this.data) return;
-    this.roleForm.patchValue(this.data);
+    this.applicationForm.patchValue(this.data);
   }
 }

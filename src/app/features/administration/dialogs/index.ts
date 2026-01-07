@@ -1,2 +1,2 @@
-export * from './client-editor/client-editor';
+export * from './application-editor/application-editor';
 export * from './user-editor/user-editor';

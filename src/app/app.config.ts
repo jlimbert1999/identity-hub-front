@@ -24,6 +24,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withInterceptors([authInterceptor])),
     provideRouter(routes),
     providePrimeNG({
+      ripple:true,
       theme: {
         preset: AuraSky,
         options: {

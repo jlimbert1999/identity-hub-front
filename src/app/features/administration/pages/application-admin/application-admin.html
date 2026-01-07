@@ -30,7 +30,6 @@
         <th>Nombre</th>
         <th>Descripcion</th>
         <th>Codigo</th>
-        <th>URL</th>
         <th style="width: 3rem"></th>
       </tr>
     </ng-template>
@@ -38,8 +37,7 @@
       <tr>
         <td>{{ item.name }}</td>
         <td>{{ item.description }}</td>
-        <td>{{ item.clientKey }}</td>
-        <td>{{ item.baseUrl }}</td>
+        <td>{{ item.clientId }}</td>
         <td>
           <p-button
             [text]="true"
