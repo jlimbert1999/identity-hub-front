@@ -3,19 +3,19 @@ import { MenuItem } from 'primeng/api';
 export const MENU_ACTIONS: MenuItem[] = [
   {
     label: 'Usuarios',
-    routerLink: '/users',
+    routerLink: '/home/users',
     icon: 'pi-users',
     roles: ['ADMIN'],
   },
   {
     label: 'Sistemas',
-    routerLink: '/applications',
+    routerLink: '/home/applications',
     icon: 'pi-box',
     roles: ['ADMIN'],
   },
   {
     label: 'Mis sistemas',
-    routerLink: '/apps',
+    routerLink: '/home/apps',
     icon: 'pi-th-large',
     roles: ['USER'],
   },

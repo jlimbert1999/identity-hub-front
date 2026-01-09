@@ -39,14 +39,18 @@
     <div>
       <p-floatlabel variant="on">
         <input
-          id="defaultRole"
+          id="clientProfile"
           [fluid]="true"
           pInputText
           autocomplete="off"
-          formControlName="defaultRole"
+          formControlName="clientProfile"
         />
-        <label for="defaultRole">Nombre del rol</label>
+        <label for="clientProfile">Nombre del rol</label>
       </p-floatlabel>
+    </div>
+    <div class="flex items-center gap-x-2 px-4">
+      <span>Color:</span>
+      <p-colorpicker formControlName="color" appendTo="body" />
     </div>
     <div class="sm:col-span-2">
       <p-floatlabel variant="on">

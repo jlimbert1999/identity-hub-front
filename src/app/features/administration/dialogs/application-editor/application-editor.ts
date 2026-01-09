@@ -1,15 +1,16 @@
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import { ColorPickerModule } from 'primeng/colorpicker';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
-import { AutoCompleteModule } from 'primeng/autocomplete';
 
-import { ClientDataSource } from '../../services';
-import { ClientResponse } from '../../interfaces';
-import { CommonModule } from '@angular/common';
+import { ApplicationResponse } from '../../interfaces';
+import { ApplicationDataSource } from '../../services';
 
 @Component({
   selector: 'app-application-editor',
@@ -20,6 +21,7 @@ import { CommonModule } from '@angular/common';
     InputTextModule,
     ButtonModule,
     AutoCompleteModule,
+    ColorPickerModule,
   ],
   templateUrl: './application-editor.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -27,19 +29,20 @@ import { CommonModule } from '@angular/common';
 export class ApplicationEditor {
   private _formBuilder = inject(FormBuilder);
   private dialogRef = inject(DynamicDialogRef);
-  private clientDataSource = inject(ClientDataSource);
+  private clientDataSource = inject(ApplicationDataSource);
 
-  readonly data?: ClientResponse = inject(DynamicDialogConfig).data;
+  readonly data?: ApplicationResponse = inject(DynamicDialogConfig).data;
 
   applicationForm: FormGroup = this._formBuilder.nonNullable.group({
     name: ['', Validators.required],
     clientId: ['', Validators.required],
     description: [''],
     launchUrl: ['', Validators.required],
-    defaultRole: ['', Validators.required],
+    clientProfile: ['', Validators.required],
     isConfidential: [true, Validators.required],
     isActive: [true, Validators.required],
     redirectUris: [[], Validators.required],
+    color: ['#2B7FFF'],
   });
 
   ngOnInit() {
@@ -60,7 +63,6 @@ export class ApplicationEditor {
   }
 
   private loadForm() {
-    if (!this.data) return;
-    this.applicationForm.patchValue(this.data);
+    this.applicationForm.patchValue(this.data ?? {});
   }
 }

@@ -5,9 +5,8 @@ import { TableModule, TablePageEvent } from 'primeng/table';
 import { DialogService } from 'primeng/dynamicdialog';
 import { ButtonModule } from 'primeng/button';
 
-import { ClientDataSource } from '../../services';
+import { ApplicationDataSource } from '../../services';
 import { SearchInput } from '../../../../shared';
-import { ClientResponse } from '../../interfaces';
 import { ApplicationEditor } from '../../dialogs';
 
 @Component({
@@ -18,7 +17,7 @@ import { ApplicationEditor } from '../../dialogs';
 })
 export default class ApplicationAdmin {
   private dialogService = inject(DialogService);
-  private clientDataSource = inject(ClientDataSource);
+  private clientDataSource = inject(ApplicationDataSource);
 
   limit = signal(10);
   offset = signal(0);
@@ -42,35 +41,21 @@ export default class ApplicationAdmin {
     return this.roleResource.value().total;
   });
 
-  openCreateDialog() {
+  openApplicationDialog(app?: any) {
     const dialogRef = this.dialogService.open(ApplicationEditor, {
-      header: 'Crear rol',
+      header: app ? 'Editar sistema' : 'Crear sistema',
       modal: true,
       draggable: false,
+      closeOnEscape: true,
+      closable: true,
       width: '40vw',
+      data: app,
       breakpoints: {
         '960px': '75vw',
         '640px': '90vw',
       },
     });
-    dialogRef?.onClose.subscribe((result?: ClientResponse) => {
-      if (!result) return;
-      this.insreNewItemDataSource(result);
-    });
-  }
-
-  openUpdateDialog(item: any) {
-    const dialogRef = this.dialogService.open(ApplicationEditor, {
-      header: 'Editar rol',
-      modal: true,
-      width: '30vw',
-      data: item,
-      breakpoints: {
-        '960px': '75vw',
-        '640px': '90vw',
-      },
-    });
-    dialogRef?.onClose.subscribe((result?: ClientResponse) => {
+    dialogRef?.onClose.subscribe((result?: any) => {
       if (!result) return;
       this.updateItemDataSource(result);
     });
@@ -86,17 +71,16 @@ export default class ApplicationAdmin {
     this.offset.set(event.first);
   }
 
-  private insreNewItemDataSource(item: ClientResponse): void {
-    this.dataSource.update((values) => [item, ...values]);
-    this.dataSize.update((value) => (value += 1));
-  }
-
-  private updateItemDataSource(item: ClientResponse): void {
+  private updateItemDataSource(item: any): void {
     const index = this.dataSource().findIndex(({ id }) => item.id === id);
-    if (index == -1) return;
-    this.dataSource.update((values) => {
-      values[index] = item;
-      return [...values];
-    });
+    if (index === -1) {
+      this.dataSource.update((values) => [item, ...values]);
+      this.dataSize.update((value) => (value += 1));
+    } else {
+      this.dataSource.update((values) => {
+        values[index] = item;
+        return [...values];
+      });
+    }
   }
 }

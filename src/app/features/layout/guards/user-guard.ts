@@ -1,12 +1,20 @@
 import { Router, type CanActivateFn } from '@angular/router';
 import { inject } from '@angular/core';
 
+import { catchError, tap } from 'rxjs';
+
 import { AuthDataSource } from '../services';
 
 export const userGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
   const authDataSource = inject(AuthDataSource);
-  return authDataSource.checkAuthStatus();
+  return authDataSource.checkAuthStatus().pipe(
+    tap((isAuth) => {
+      if (!isAuth) {
+        router.navigateByUrl('/login');
+      }
+    })
+  );
 
   // return http.get(`${environment.baseUrl}/oauth/status`, { withCredentials: true }).pipe(
   //   map((user) => {

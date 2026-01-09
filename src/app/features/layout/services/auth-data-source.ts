@@ -13,7 +13,7 @@ export class AuthDataSource {
   readonly URL = `${environment.baseUrl}/auth`;
   private http = inject(HttpClient);
 
-  _user = signal<AuthUserResponse | null>(null);
+  private _user = signal<AuthUserResponse | null>(null);
 
   user = computed(() => this._user());
   menu = computed(() => {
@@ -23,29 +23,7 @@ export class AuthDataSource {
     );
   });
 
-  login(login: string, password: string, remember: boolean = false) {
-    if (remember) {
-      localStorage.setItem('login', login);
-    } else {
-      localStorage.removeItem('login');
-    }
-    return this.http
-      .post(`${environment.baseUrl}/oauth/login`, { login, password }, { withCredentials: true })
-      .pipe(
-        tap((resp) => {
-          console.log(resp);
-        })
-      );
-  }
-
   checkAuthStatus() {
-    // return this.http
-    //   .get<{ user: AuthUserResponse }>(`${this.URL}/status`, { withCredentials: true })
-    //   .pipe(
-    //     tap((resp) => this._user.set(resp.user)),
-    //     map(() => true),
-    //     catchError(() => of(false))
-    //   );
     return this.http
       .get<{ user: AuthUserResponse }>(`${environment.baseUrl}/auth/status`, {
         withCredentials: true,
@@ -53,11 +31,9 @@ export class AuthDataSource {
       .pipe(
         tap(({ user }) => {
           this._user.set(user);
-          console.log(this.menu());
         }),
         map(() => true),
         catchError(() => {
-          window.location.href = '/login';
           return of(false);
         })
       );

@@ -1,10 +1,12 @@
 export interface ApplicationResponse {
   id: number;
-  clientKey: string;
+  cleintId: string;
   name: string;
   description: string;
-  baseUrl: string;
-  defaultRole: string;
+  launchUrl: string;
+  clientSecret: string;
+  isConfidential: boolean;
+  userProfile: string;
   isActive: boolean;
   createdAt: string;
 }

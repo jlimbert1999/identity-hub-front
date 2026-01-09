@@ -2,12 +2,12 @@ import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { environment } from '../../../../environments/environment';
-import { ClientResponse } from '../interfaces';
+import { ApplicationResponse } from '../interfaces';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ClientDataSource {
+export class ApplicationDataSource {
   readonly URL = `${environment.baseUrl}/clients`;
   private http = inject(HttpClient);
 
@@ -25,7 +25,7 @@ export class ClientDataSource {
     const params = new HttpParams({
       fromObject: { limit, offset, ...(term && { term }) },
     });
-    return this.http.get<{ clients: ClientResponse[]; total: number }>(this.URL, {
+    return this.http.get<{ clients: ApplicationResponse[]; total: number }>(this.URL, {
       params,
     });
   }

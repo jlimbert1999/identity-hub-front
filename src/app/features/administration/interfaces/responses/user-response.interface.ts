@@ -8,9 +8,9 @@ export interface UserResponse {
   email: null;
   isActive: boolean;
   roles: string[];
-  createdAt: Date;
-  updatedAt: Date;
-  accesses: UserApplicationResponse[];
+  createdAt: string;
+  updatedAt: string;
+  userApplications: UserApplicationResponse[];
 }
 
 export interface UserApplicationResponse {
@@ -18,5 +18,4 @@ export interface UserApplicationResponse {
   userId: string;
   applicationId: number;
   createdAt: string;
-  updatedAt: string;
 }

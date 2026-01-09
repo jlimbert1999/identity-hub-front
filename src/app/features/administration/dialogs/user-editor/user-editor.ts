@@ -190,8 +190,9 @@ export class UserEditor {
   }
 
   private loadForm(): void {
+    console.log(this.data);
     if (!this.data) return;
-    const { accesses, ...props } = this.data;
+    const { userApplications: accesses, ...props } = this.data;
     this.userForm.patchValue({
       ...props,
       applicationIds: accesses.map(({ applicationId }) => applicationId),

@@ -1,6 +1,8 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
+
+import { finalize } from 'rxjs';
 
 import { AccessDataSource } from '../../services';
 
@@ -13,7 +15,10 @@ import { AccessDataSource } from '../../services';
 export default class MyAccess {
   private accesDataSource = inject(AccessDataSource);
 
-  applications = toSignal(this.accesDataSource.getMyApplicationms());
+  isLoading = signal(true);
+  applications = toSignal(
+    this.accesDataSource.getMyApplicationms().pipe(finalize(() => this.isLoading.set(false)))
+  );
 
   openApp(url: string) {
     window.open(url, '_blank');

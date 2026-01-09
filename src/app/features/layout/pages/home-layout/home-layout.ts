@@ -19,14 +19,12 @@ export default class HomeLayout {
   mobileMenuOpen = signal(false);
 
   constructor(private breakpoint: BreakpointObserver) {
-    this.breakpoint
-      .observe('(max-width: 1023px)') // lg
-      .subscribe(({ matches }) => {
-        if (!matches) {
-          this.mobileMenuOpen.set(false);
-        }
-        this.isMobile.set(matches);
-      });
+    this.breakpoint.observe('(max-width: 1023px)').subscribe(({ matches }) => {
+      if (!matches) {
+        this.mobileMenuOpen.set(false);
+      }
+      this.isMobile.set(matches);
+    });
   }
 
   openMobileMenu() {
