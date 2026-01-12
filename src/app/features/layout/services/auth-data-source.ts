@@ -38,4 +38,9 @@ export class AuthDataSource {
   logout() {
     return this.http.post(`${environment.baseUrl}/auth/logout`, {}, { withCredentials: true });
   }
+
+  updateProfile(password: string) {
+    // TODO update user if change another props
+    return this.http.patch(`${this.URL}/profile`, { password });
+  }
 }

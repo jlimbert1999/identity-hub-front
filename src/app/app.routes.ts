@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { isAuthenticatedGuard, isNotAuthenticatedGuard } from './features/layout/guards';
+import { isAuthenticatedGuard, isNotAuthenticatedGuard, roleGuard } from './features/layout/guards';
 
 export const routes: Routes = [
   {
@@ -27,11 +27,15 @@ export const routes: Routes = [
       {
         path: 'users',
         title: 'Usuarios',
+        canActivate: [roleGuard],
+        data: { roles: ['ADMIN'] },
         loadComponent: () => import('./features/administration/pages/user-admin/user-admin'),
       },
       {
         path: 'applications',
         title: 'Sistemas',
+        canActivate: [roleGuard],
+        data: { roles: ['ADMIN'] },
         loadComponent: () =>
           import('./features/administration/pages/application-admin/application-admin'),
       },

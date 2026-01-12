@@ -7,12 +7,12 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 import { ColorPickerModule } from 'primeng/colorpicker';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputTextModule } from 'primeng/inputtext';
+import { MessageModule } from 'primeng/message';
 import { ButtonModule } from 'primeng/button';
 
 import { ApplicationResponse } from '../../interfaces';
 import { ApplicationDataSource } from '../../services';
 import { FormUtils } from '../../../../helpers';
-import { MessageModule } from 'primeng/message';
 
 @Component({
   selector: 'app-application-editor',
@@ -54,6 +54,7 @@ export class ApplicationEditor {
   formUtils = FormUtils;
 
   ngOnInit() {
+    console.log("OPEN DIALOG");
     this.loadForm();
   }
 
