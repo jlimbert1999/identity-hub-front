@@ -24,19 +24,15 @@ export class AuthDataSource {
   });
 
   checkAuthStatus() {
-    return this.http
-      .get<{ user: AuthUserResponse }>(`${environment.baseUrl}/auth/status`, {
-        withCredentials: true,
+    return this.http.get<{ user: AuthUserResponse }>(`${environment.baseUrl}/auth/status`).pipe(
+      tap(({ user }) => {
+        this._user.set(user);
+      }),
+      map(() => true),
+      catchError(() => {
+        return of(false);
       })
-      .pipe(
-        tap(({ user }) => {
-          this._user.set(user);
-        }),
-        map(() => true),
-        catchError(() => {
-          return of(false);
-        })
-      );
+    );
   }
 
   logout() {

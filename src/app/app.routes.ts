@@ -1,22 +1,28 @@
 import { Routes } from '@angular/router';
-
-import { userGuard } from './features/layout/guards/user-guard';
+import { isAuthenticatedGuard, isNotAuthenticatedGuard } from './features/layout/guards';
 
 export const routes: Routes = [
   {
     path: 'login',
     title: 'Inicio de Sesion',
+    canActivate: [isNotAuthenticatedGuard],
     loadComponent: () => import('./features/auth/pages/login-page/login-page'),
   },
   {
     path: 'home',
-    canActivate: [userGuard],
+    title: 'Inicio',
+    canActivate: [isAuthenticatedGuard],
     loadComponent: () => import('./features/layout/pages/home-layout/home-layout'),
     children: [
       {
         path: 'welcome',
         title: 'Bienvenido/a',
         loadComponent: () => import('./features/layout/pages/welcome-page/welcome-page'),
+      },
+      {
+        path: 'settings',
+        title: 'Configuraciones',
+        loadComponent: () => import('./features/layout/pages/settings-page/settings-page'),
       },
       {
         path: 'users',
@@ -37,5 +43,6 @@ export const routes: Routes = [
       { path: '', redirectTo: 'welcome', pathMatch: 'full' },
     ],
   },
-  { path: '**', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];

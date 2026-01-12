@@ -11,6 +11,8 @@ import { ButtonModule } from 'primeng/button';
 
 import { ApplicationResponse } from '../../interfaces';
 import { ApplicationDataSource } from '../../services';
+import { FormUtils } from '../../../../helpers';
+import { MessageModule } from 'primeng/message';
 
 @Component({
   selector: 'app-application-editor',
@@ -22,6 +24,7 @@ import { ApplicationDataSource } from '../../services';
     ButtonModule,
     AutoCompleteModule,
     ColorPickerModule,
+    MessageModule,
   ],
   templateUrl: './application-editor.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -35,7 +38,10 @@ export class ApplicationEditor {
 
   applicationForm: FormGroup = this._formBuilder.nonNullable.group({
     name: ['', Validators.required],
-    clientId: ['', Validators.required],
+    clientId: [
+      '',
+      [Validators.required, Validators.pattern('^[a-zA-Z0-9_-]*$'), Validators.minLength(3)],
+    ],
     description: [''],
     launchUrl: ['', Validators.required],
     clientProfile: ['', Validators.required],
@@ -44,6 +50,8 @@ export class ApplicationEditor {
     redirectUris: [[], Validators.required],
     color: ['#2B7FFF'],
   });
+
+  formUtils = FormUtils;
 
   ngOnInit() {
     this.loadForm();

@@ -11,7 +11,7 @@ import { AuthDataSource } from '../../services';
           <i class="pi pi-home" style="font-size: 2.5rem"></i>
         </div>
 
-        <h1 class="text-xl md:text-2xl font-black text-slate-900 tracking-tight mb-4">
+        <h1 class="text-xl md:text-2xl font-bold text-slate-900 tracking-tight mb-4">
           Bienvenid@
           <span class="text-primary-600">{{ userFullName }}</span>
         </h1>

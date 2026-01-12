@@ -67,9 +67,7 @@ export class ProfileOverlay {
     {
       label: 'Configuración',
       icon: 'pi pi-cog',
-      command: () => {
-        this.poppoverRef().hide();
-      },
+      command: () => this.setting(),
     },
     {
       label: 'Cerrar sesión',
@@ -78,6 +76,11 @@ export class ProfileOverlay {
       command: () => this.logout(),
     },
   ];
+
+  setting() {
+    this.poppoverRef().hide();
+    this.router.navigate(['/home/settings']);
+  }
 
   logout() {
     this.authDataSource.logout().subscribe(() => {

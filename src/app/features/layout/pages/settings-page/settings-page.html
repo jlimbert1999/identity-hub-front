@@ -1,0 +1,42 @@
+<div class="p-6 max-w-md">
+  <h2 class="text-xl font-semibold mb-1">Cambiar contraseña</h2>
+  <p class="text-sm text-gray-500 mb-6">
+    Elige una nueva contraseña para tu cuenta
+  </p>
+
+  <form class="space-y-5">
+    <!-- Nueva contraseña -->
+    <div>
+      <label class="block text-sm font-medium mb-1">
+        Nueva contraseña
+      </label>
+      <p-password
+        [feedback]="true"
+        toggleMask="true"
+        inputClass="w-full"
+        placeholder="Nueva contraseña">
+      </p-password>
+    </div>
+
+    <!-- Confirmar contraseña -->
+    <div>
+      <label class="block text-sm font-medium mb-1">
+        Confirmar contraseña
+      </label>
+      <p-password
+        [feedback]="false"
+        toggleMask="true"
+        inputClass="w-full"
+        placeholder="Confirmar contraseña">
+      </p-password>
+    </div>
+
+    <!-- Botón -->
+    <button
+      pButton
+      type="submit"
+      label="Guardar cambios"
+      class="w-full">
+    </button>
+  </form>
+</div>

@@ -21,8 +21,13 @@
     <div>
       <p-floatlabel variant="on">
         <input id="code" [fluid]="true" pInputText autocomplete="off" formControlName="clientId" />
-        <label for="code">Codigo</label>
+        <label for="code">Identificador unico</label>
       </p-floatlabel>
+      @if (formUtils.isValidField(applicationForm, 'clientId')) {
+      <p-message severity="error" size="small" variant="simple">
+        {{ formUtils.getErrorMessage(applicationForm, 'clientId') }}
+      </p-message>
+      }
     </div>
     <div>
       <p-floatlabel variant="on">
@@ -45,7 +50,7 @@
           autocomplete="off"
           formControlName="clientProfile"
         />
-        <label for="clientProfile">Nombre del rol</label>
+        <label for="clientProfile">Nombre del rol por defecto</label>
       </p-floatlabel>
     </div>
     <div class="flex items-center gap-x-2 px-4">
